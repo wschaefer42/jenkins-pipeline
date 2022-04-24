@@ -18,10 +18,10 @@ pipeline {
             }
         }
         stage('Build a Push Docker Image') {
+            environment {
+                DOCKER_PWD = credentials('docker-login-pwd')
+            }
             steps {
-                environment {
-                    DOCKER_PWD = credentials('docker-login-pwd')
-                }
                 echo("Credentionals $DOCKER_PWD")
                 sh 'docker build -t $registry:$BUILD_NUMBER .'
                 sh 'docker login -u wschaefer42 -p $DOCKER_PWD'
