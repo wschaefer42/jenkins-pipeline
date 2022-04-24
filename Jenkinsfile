@@ -1,7 +1,6 @@
 pipeline {
     environment {
         registry = 'wschaefer42/jenkins-docker-test'
-        DOCKER_PWD = credentials('docker-login-pwd')
     }
     agent any
     options {
@@ -20,6 +19,10 @@ pipeline {
         }
         stage('Build a Push Docker Image') {
             steps {
+                environment {
+                    DOCKER_PWD = credentials('docker-login-pwd')
+                }
+                echo("Credentionals $DOCKER_PWD")
                 sh 'docker build -t $registry:$BUILD_NUMBER .'
                 sh 'docker login -u wschaefer42 -p $DOCKER_PWD'
                 sh 'docker push $registry:$BUILD_NUMBER'
