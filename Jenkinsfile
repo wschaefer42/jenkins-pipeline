@@ -1,4 +1,8 @@
 pipeline {
+    environment {
+        registry = 'wschaefer42/jenkins-docker-test'
+        DOCKER_PWD = credentials('docker-login-pwd')
+    }
     agent any
     options {
         skipStagesAfterUnstable()
@@ -6,22 +10,20 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building'
+                sh 'npm install'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing'
+                sh 'npm test'
             }
         }
-        stage('Deploy to Staging') {
+        stage('Build a Push Docker Image') {
             steps {
-                echo 'Deploying to Staging'
-            }
-        }
-        stage('Deploy to Production') {
-            steps {
-                echo 'Deploying to Production'
+                sh 'docker build -t $registry:$BUILD_NUMBER .'
+                sh 'docker login -u wschaefer42 -p $DOCKER_PWD'
+                sh 'docker push $registry:$BUILD_NUMBER'
+                sh 'docker rm $registry:$BUILD_NUMBER'
             }
         }
     }
