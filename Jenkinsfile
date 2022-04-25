@@ -19,8 +19,8 @@ pipeline {
         }
         stage('Build a Push Docker Image') {
             environment {
-                // DOCKER_PWD = credentials('docker-login-pwd')
-                DOCKER_PWD = "gugus"
+                DOCKER_PWD = credentials('docker-login-pwd')
+                // DOCKER_PWD = "gugus"
             }
             steps {
                 echo "Credentials ${DOCKER_PWD}"
