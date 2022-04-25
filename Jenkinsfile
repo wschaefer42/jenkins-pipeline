@@ -22,7 +22,7 @@ pipeline {
                 DOCKER_PWD = credentials('docker-login-pwd')
             }
             steps {
-                echo("Credentionals $DOCKER_PWD")
+                echo("Credentials $DOCKER_PWD")
                 sh 'docker build -t $registry:$BUILD_NUMBER .'
                 sh 'docker login -u wschaefer42 -p $DOCKER_PWD'
                 sh 'docker push $registry:$BUILD_NUMBER'
