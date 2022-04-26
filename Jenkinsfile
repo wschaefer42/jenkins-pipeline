@@ -23,7 +23,7 @@ pipeline {
             }
             steps {
                 sh 'docker build -t $registry:$BUILD_NUMBER .'
-                // sh 'docker login -u wschaefer42 -p $DOCKER_PWD'
+                sh 'docker login -u wschaefer42 -p $DOCKER_PWD'
                 sh 'docker images'
                 sh 'docker push $registry:$BUILD_NUMBER'
                 sh 'docker rm $registry:$BUILD_NUMBER'
