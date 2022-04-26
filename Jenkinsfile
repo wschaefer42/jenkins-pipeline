@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Deploy and some test') {
             steps{
-                sh './jenkins/scripts/deploy-and.test.sh'
+                sh './jenkins/scripts/deploy-and-test.sh'
             }
         }
         stage('Clean-up') {
