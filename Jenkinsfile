@@ -29,5 +29,15 @@ pipeline {
                 sh 'docker rmi $registry:$BUILD_NUMBER'
             }
         }
+        stage('Deploy and some test') {
+            steps{
+                sh './jenkins/scripts/deploy-and.test.sh'
+            }
+        }
+        stage('Clean-up') {
+            steps {
+                sh './jenkins/scripts/cleanup.sh'
+            }
+        }
     }
 }
