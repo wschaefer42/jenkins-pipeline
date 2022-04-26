@@ -18,4 +18,4 @@ done
 echo "API is running"
 
 # Test it
-docker run --net test-net -it curlimages/curl api:3000
+docker run --rm --net test-net -it curlimages/curl api:3000
