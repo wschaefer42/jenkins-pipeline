@@ -29,7 +29,7 @@ pipeline {
                 sh 'docker rmi $registry:$BUILD_NUMBER'
             }
         }
-        stage('Deploy and some test') {
+        stage('Deploy and smoke test') {
             steps{
                 sh './jenkins/scripts/deploy-and-test.sh'
             }
